@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Losowanie drużyn FIFA 26</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: #fff;
+        text-align: center;
+        padding: 40px;
+    }
+    button {
+        padding: 15px 30px;
+        font-size: 18px;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        background: #00c853;
+        color: #000;
+        margin-top: 20px;
+    }
+    .player {
+        margin-top: 30px;
+        font-size: 22px;
+    }
+</style>
+</head>
+<body>
+
+<h1>🎮 Losowanie drużyn – FIFA 26</h1>
+
+<button onclick="losuj()">Losuj drużyny</button>
+
+<div class="player" id="p1">Gracz 1: —</div>
+<div class="player" id="p2">Gracz 2: —</div>
+
+<script>
+const druzyny = [
+    // Premier League
+    "Manchester City","Arsenal","Liverpool","Chelsea","Manchester United",
+    "Tottenham","Newcastle","Aston Villa","West Ham","Brighton",
+    "Brentford","Crystal Palace","Everton","Fulham","Nottingham Forest",
+    "Wolves","Bournemouth","Burnley","Sheffield United","Luton Town",
+
+    // LaLiga
+    "Real Madryt","FC Barcelona","Atletico Madryt","Sevilla","Real Sociedad",
+    "Villarreal","Betis","Valencia","Athletic Bilbao","Girona",
+    "Getafe","Celta Vigo","Osasuna","Mallorca","Alaves",
+    "Rayo Vallecano","Granada","Las Palmas","Cadiz","Almeria",
+
+    // Serie A
+    "Inter","AC Milan","Juventus","Napoli","Roma",
+    "Lazio","Atalanta","Fiorentina","Bologna","Torino",
+    "Monza","Genoa","Udinese","Lecce","Cagliari",
+    "Verona","Empoli","Frosinone","Sassuolo","Salernitana",
+
+    // Bundesliga
+    "Bayern Monachium","Borussia Dortmund","RB Lipsk","Bayer Leverkusen","Eintracht Frankfurt",
+    "Union Berlin","Freiburg","Hoffenheim","Werder Brema","Wolfsburg",
+    "Mainz","Augsburg","Borussia M'gladbach","Bochum","Heidenheim",
+    "Stuttgart","Koln","Darmstadt","St. Pauli","Hamburg",
+
+    // Ligue 1
+    "PSG","Marseille","Monaco","Lyon","Lille",
+    "Rennes","Nice","Lens","Reims","Strasbourg",
+    "Nantes","Montpellier","Brest","Toulouse","Lorient",
+    "Clermont","Metz","Le Havre","Angers","Auxerre"
+];
+
+function losuj() {
+    let pula = [...druzyny];
+
+    const p1 = Math.floor(Math.random() * pula.length);
+    const team1 = pula.splice(p1, 1)[0];
+
+    const p2 = Math.floor(Math.random() * pula.length);
+    const team2 = pula[p2];
+
+    document.getElementById("p1").innerText = "Gracz 1: " + team1;
+    document.getElementById("p2").innerText = "Gracz 2: " + team2;
+}
+</script>
+
+</body>
+</html>
