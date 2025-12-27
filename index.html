@@ -2,87 +2,177 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Losowanie drużyn FIFA 26</title>
+<title>FC 26 – Losowanie drużyn</title>
+
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #111;
-        color: #fff;
-        text-align: center;
-        padding: 40px;
-    }
-    button {
-        padding: 15px 30px;
-        font-size: 18px;
-        cursor: pointer;
-        border: none;
-        border-radius: 8px;
-        background: #00c853;
-        color: #000;
-        margin-top: 20px;
-    }
-    .player {
-        margin-top: 30px;
-        font-size: 22px;
-    }
+body {
+    background: radial-gradient(circle at top, #0f172a, #020617);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 30px;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 16px 40px;
+    font-size: 20px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #000;
+}
+
+.players {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 50px;
+}
+
+.player {
+    width: 220px;
+    min-height: 260px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 20px;
+    animation: fadeIn 0.6s ease;
+}
+
+.player img {
+    width: 90px;
+    margin: 15px 0;
+    animation: pop 0.4s ease;
+}
+
+.roll {
+    animation: roll 0.15s linear infinite;
+}
+
+@keyframes roll {
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pop {
+    from { transform: scale(0.6); }
+    to { transform: scale(1); }
+}
 </style>
 </head>
+
 <body>
 
-<h1>🎮 Losowanie drużyn – FIFA 26</h1>
+<h1>🎮 FC 26 – LOSOWANIE DRUŻYN</h1>
+<button onclick="losuj()">LOSUJ</button>
 
-<button onclick="losuj()">Losuj drużyny</button>
-
-<div class="player" id="p1">Gracz 1: —</div>
-<div class="player" id="p2">Gracz 2: —</div>
+<div class="players">
+    <div class="player" id="p1">Gracz 1</div>
+    <div class="player" id="p2">Gracz 2</div>
+</div>
 
 <script>
 const teams = [
-  { name: "Arsenal", logo: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" },
-  { name: "Aston Villa", logo: "https://upload.wikimedia.org/wikipedia/en/f/f9/Aston_Villa_FC_crest.svg" },
-  { name: "Chelsea", logo: "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" },
-  { name: "Liverpool", logo: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" },
-  { name: "Manchester City", logo: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" },
-  { name: "Manchester United", logo: "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" },
-  { name: "Tottenham Hotspur", logo: "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" },
 
-  { name: "Real Madrid", logo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" },
-  { name: "FC Barcelona", logo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg" },
-  { name: "Atletico Madrid", logo: "https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg" },
-  { name: "Sevilla", logo: "https://upload.wikimedia.org/wikipedia/en/9/92/Sevilla_FC_logo.svg" },
+/* PREMIER LEAGUE */
+{n:"Arsenal",l:"https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg"},
+{n:"Aston Villa",l:"https://upload.wikimedia.org/wikipedia/en/f/f9/Aston_Villa_FC_crest.svg"},
+{n:"Bournemouth",l:"https://upload.wikimedia.org/wikipedia/en/5/5c/AFC_Bournemouth_%282017%29.svg"},
+{n:"Brentford",l:"https://upload.wikimedia.org/wikipedia/en/0/0c/Brentford_FC_crest.svg"},
+{n:"Brighton",l:"https://upload.wikimedia.org/wikipedia/en/f/fd/Brighton_%26_Hove_Albion_logo.svg"},
+{n:"Chelsea",l:"https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg"},
+{n:"Crystal Palace",l:"https://upload.wikimedia.org/wikipedia/en/0/0c/Crystal_Palace_FC_logo.svg"},
+{n:"Everton",l:"https://upload.wikimedia.org/wikipedia/en/7/7c/Everton_FC_logo.svg"},
+{n:"Fulham",l:"https://upload.wikimedia.org/wikipedia/en/0/0a/Fulham_FC_%28shield%29.svg"},
+{n:"Liverpool",l:"https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"},
+{n:"Man City",l:"https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"},
+{n:"Man United",l:"https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg"},
+{n:"Newcastle",l:"https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg"},
+{n:"Nottingham Forest",l:"https://upload.wikimedia.org/wikipedia/en/5/5c/Nottingham_Forest_FC_logo.svg"},
+{n:"Tottenham",l:"https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg"},
+{n:"West Ham",l:"https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg"},
+{n:"Wolves",l:"https://upload.wikimedia.org/wikipedia/en/f/fc/Wolverhampton_Wanderers.svg"},
 
-  { name: "Bayern Munich", logo: "https://upload.wikimedia.org/wikipedia/commons/1/1f/FC_Bayern_München_logo_%282017%29.svg" },
-  { name: "Borussia Dortmund", logo: "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg" },
-  { name: "RB Leipzig", logo: "https://upload.wikimedia.org/wikipedia/en/0/04/RB_Leipzig.svg" },
+/* LALIGA */
+{n:"Real Madrid",l:"https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg"},
+{n:"Barcelona",l:"https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg"},
+{n:"Atletico Madrid",l:"https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg"},
+{n:"Sevilla",l:"https://upload.wikimedia.org/wikipedia/en/9/92/Sevilla_FC_logo.svg"},
+{n:"Real Sociedad",l:"https://upload.wikimedia.org/wikipedia/en/0/0b/Real_Sociedad_logo.svg"},
+{n:"Villarreal",l:"https://upload.wikimedia.org/wikipedia/en/6/6a/Villarreal_CF_logo.svg"},
+{n:"Betis",l:"https://upload.wikimedia.org/wikipedia/en/f/fd/Real_Betis_logo.svg"},
+{n:"Valencia",l:"https://upload.wikimedia.org/wikipedia/en/c/c4/Valencia_CF_logo.svg"},
+{n:"Athletic Bilbao",l:"https://upload.wikimedia.org/wikipedia/en/4/47/Athletic_Club_logo.svg"},
+{n:"Girona",l:"https://upload.wikimedia.org/wikipedia/en/1/16/Girona_FC_logo.svg"},
 
-  { name: "Juventus", logo: "https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo.svg" },
-  { name: "AC Milan", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d0/AC_Milan_Logo.svg" },
-  { name: "Inter Milan", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/Inter_Milan_logo.svg" },
-  { name: "Napoli", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2d/SSC_Napoli_logo.svg" },
+/* BUNDESLIGA */
+{n:"Bayern Munich",l:"https://upload.wikimedia.org/wikipedia/commons/1/1f/FC_Bayern_München_logo_%282017%29.svg"},
+{n:"Borussia Dortmund",l:"https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg"},
+{n:"RB Leipzig",l:"https://upload.wikimedia.org/wikipedia/en/0/04/RB_Leipzig.svg"},
+{n:"Leverkusen",l:"https://upload.wikimedia.org/wikipedia/commons/4/4f/Bayer_04_Leverkusen_logo.svg"},
+{n:"Eintracht Frankfurt",l:"https://upload.wikimedia.org/wikipedia/en/0/0c/Eintracht_Frankfurt_logo.svg"},
+{n:"Stuttgart",l:"https://upload.wikimedia.org/wikipedia/en/0/02/VfB_Stuttgart_logo.svg"},
+{n:"Werder Bremen",l:"https://upload.wikimedia.org/wikipedia/en/a/a0/SV_Werder_Bremen_logo.svg"},
 
-  { name: "Paris Saint-Germain", logo: "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" },
-  { name: "Olympique Marseille", logo: "https://upload.wikimedia.org/wikipedia/en/4/4c/Olympique_Marseille_logo.svg" },
-  { name: "AS Monaco", logo: "https://upload.wikimedia.org/wikipedia/en/c/c6/AS_Monaco_FC.svg" }
+/* SERIE A */
+{n:"Juventus",l:"https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo.svg"},
+{n:"AC Milan",l:"https://upload.wikimedia.org/wikipedia/commons/d/d0/AC_Milan_Logo.svg"},
+{n:"Inter",l:"https://upload.wikimedia.org/wikipedia/commons/0/05/Inter_Milan_logo.svg"},
+{n:"Napoli",l:"https://upload.wikimedia.org/wikipedia/commons/2/2d/SSC_Napoli_logo.svg"},
+{n:"Roma",l:"https://upload.wikimedia.org/wikipedia/en/f/f7/AS_Roma_logo.svg"},
+{n:"Lazio",l:"https://upload.wikimedia.org/wikipedia/en/0/05/SS_Lazio_Logo.svg"},
+{n:"Atalanta",l:"https://upload.wikimedia.org/wikipedia/en/2/29/Atalanta_BC_logo.svg"},
+
+/* LIGUE 1 */
+{n:"PSG",l:"https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg"},
+{n:"Marseille",l:"https://upload.wikimedia.org/wikipedia/en/4/4c/Olympique_Marseille_logo.svg"},
+{n:"Monaco",l:"https://upload.wikimedia.org/wikipedia/en/c/c6/AS_Monaco_FC.svg"},
+{n:"Lyon",l:"https://upload.wikimedia.org/wikipedia/en/c/c6/Olympique_Lyonnais_logo.svg"},
+{n:"Lille",l:"https://upload.wikimedia.org/wikipedia/en/5/56/Lille_OSC_logo.svg"},
+{n:"Rennes",l:"https://upload.wikimedia.org/wikipedia/en/7/75/Stade_Rennais_FC_logo.svg"}
 ];
 
-function losuj() {
-    let pool = [...teams];
-
-    let t1 = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];
-    let t2 = pool[Math.floor(Math.random() * pool.length)];
-
-    document.getElementById("p1").innerHTML =
-        "Gracz 1:<br>" +
-        "<img src='" + t1.logo + "' width='80'><br>" +
-        t1.name;
-
-    document.getElementById("p2").innerHTML =
-        "Gracz 2:<br>" +
-        "<img src='" + t2.logo + "' width='80'><br>" +
-        t2.name;
+function roll(el){
+    el.classList.add("roll");
+    let i = 0;
+    let interval = setInterval(()=>{
+        el.innerHTML = teams[i%teams.length].n;
+        i++;
+    },100);
+    return interval;
 }
-    document.getElementById("p1").innerText = "Gracz 1: " + team1;
-    document.getElementById("p2").innerText = "Gracz 2: " + team2;
+
+function losuj(){
+    const p1 = document.getElementById("p1");
+    const p2 = document.getElementById("p2");
+
+    let r1 = roll(p1);
+    let r2 = roll(p2);
+
+    setTimeout(()=>{
+        clearInterval(r1);
+        clearInterval(r2);
+
+        let pool=[...teams];
+        let t1=pool.splice(Math.floor(Math.random()*pool.length),1)[0];
+        let t2=pool[Math.floor(Math.random()*pool.length)];
+
+        p1.classList.remove("roll");
+        p2.classList.remove("roll");
+
+        p1.innerHTML=`<h3>Gracz 1</h3><img src="${t1.l}"><div>${t1.n}</div>`;
+        p2.innerHTML=`<h3>Gracz 2</h3><img src="${t2.l}"><div>${t2.n}</div>`;
+    },1800);
 }
 </script>
 
