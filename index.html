@@ -3,116 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EA FC 26 – Losowanie Drużyn</title>
+<title>EA FC 26 – Pack Opening</title>
 
 <style>
-body {
-    margin: 0;
-    background: radial-gradient(circle at top, #1b1f3b, #000);
-    font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
+body{
+    margin:0;
+    background:radial-gradient(circle at top,#0b0f2e,#000);
+    font-family:Arial,sans-serif;
+    color:white;
+    text-align:center;
+    overflow:hidden;
 }
 
-h1 {
-    margin: 20px 0;
+h1{margin:20px 0;}
+
+button{
+    padding:16px 50px;
+    font-size:20px;
+    border:none;
+    border-radius:12px;
+    background:gold;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-button {
-    padding: 15px 40px;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    background: gold;
-    cursor: pointer;
-    font-weight: bold;
+#pack{
+    width:200px;
+    height:260px;
+    background:linear-gradient(145deg,#1a1f5c,#0b0f2e);
+    margin:60px auto 0;
+    border-radius:18px;
+    box-shadow:0 0 40px rgba(255,215,0,.6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    animation:pulse 1.2s infinite;
 }
 
-#draw {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 40px;
+#pack.open{
+    animation:explode .9s ease forwards;
 }
 
-.card {
-    width: 180px;
-    height: 230px;
-    background: linear-gradient(145deg, #0b0f2e, #1e245c);
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    animation: flip 0.7s ease;
-    box-shadow: 0 0 25px rgba(255,215,0,0.6);
+@keyframes pulse{
+    0%{box-shadow:0 0 15px rgba(255,215,0,.3);}
+    50%{box-shadow:0 0 35px rgba(255,215,0,.8);}
+    100%{box-shadow:0 0 15px rgba(255,215,0,.3);}
 }
 
-.card img {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
+@keyframes explode{
+    to{transform:scale(2);opacity:0;}
 }
 
-@keyframes flip {
-    from { transform: rotateY(90deg); opacity: 0; }
-    to { transform: rotateY(0); opacity: 1; }
+#cards{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    margin-top:40px;
+}
+
+.card{
+    width:200px;
+    height:260px;
+    background:linear-gradient(145deg,#0b0f2e,#1e245c);
+    border-radius:18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transform:scale(0.3) rotateY(180deg);
+    box-shadow:0 0 40px rgba(255,215,0,.8);
+}
+
+.card.show{
+    animation:reveal 1.1s ease forwards;
+}
+
+.card img{
+    width:130px;
+    height:130px;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+@keyframes reveal{
+    60%{transform:scale(1.1) rotateY(0);}
+    100%{opacity:1;transform:scale(1) rotateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<h1>EA FC 26 – LOSOWANIE</h1>
-<button onclick="drawTeams()">LOSUJ</button>
+<h1>🎴 EA FC 26 – PACK OPENING</h1>
+<button onclick="openPack()">OTWÓRZ PACZKĘ</button>
 
-<div id="draw"></div>
+<div id="pack">PACK</div>
+<div id="cards"></div>
 
 <script>
-const teams = [
-
-/* PREMIER LEAGUE */
-{n:"Arsenal",l:"https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.png"},
-{n:"Manchester City",l:"https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_City_FC.png"},
-{n:"Manchester United",l:"https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC.png"},
-{n:"Liverpool",l:"https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.png"},
-{n:"Chelsea",l:"https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.png"},
-
-/* LA LIGA */
+const teams=[
 {n:"Real Madrid",l:"https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.png"},
 {n:"FC Barcelona",l:"https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona.png"},
-{n:"Atlético Madrid",l:"https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.png"},
-
-/* SERIE A */
+{n:"Manchester City",l:"https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_City_FC.png"},
+{n:"Arsenal",l:"https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.png"},
+{n:"Bayern München",l:"https://upload.wikimedia.org/wikipedia/en/1/1b/FC_Bayern_Munich_logo.png"},
+{n:"PSG",l:"https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..png"},
 {n:"Juventus",l:"https://upload.wikimedia.org/wikipedia/en/d/d2/Juventus_FC_2017_logo.png"},
 {n:"AC Milan",l:"https://upload.wikimedia.org/wikipedia/en/0/0c/AC_Milan.png"},
-{n:"Inter",l:"https://upload.wikimedia.org/wikipedia/en/0/05/Inter_Milan.png"},
-{n:"Napoli",l:"https://upload.wikimedia.org/wikipedia/commons/2/2d/SSC_Napoli.png"},
-
-/* BUNDESLIGA */
-{n:"Bayern München",l:"https://upload.wikimedia.org/wikipedia/en/1/1b/FC_Bayern_Munich_logo.png"},
-{n:"Borussia Dortmund",l:"https://upload.wikimedia.org/wikipedia/en/6/67/Borussia_Dortmund_logo.png"},
-{n:"RB Leipzig",l:"https://upload.wikimedia.org/wikipedia/en/0/04/RB_Leipzig_2014_logo.png"},
-
-/* LIGUE 1 */
-{n:"PSG",l:"https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..png"},
-{n:"Marseille",l:"https://upload.wikimedia.org/wikipedia/en/d/d8/Olympique_Marseille_logo.png"}
-
+{n:"Liverpool",l:"https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.png"},
+{n:"Borussia Dortmund",l:"https://upload.wikimedia.org/wikipedia/en/6/67/Borussia_Dortmund_logo.png"}
 ];
 
-function drawTeams() {
-    const draw = document.getElementById("draw");
-    draw.innerHTML = "";
+function openPack(){
+    const pack=document.getElementById("pack");
+    const cards=document.getElementById("cards");
+    cards.innerHTML="";
+    pack.classList.add("open");
 
-    const shuffled = [...teams].sort(() => Math.random() - 0.5);
-    shuffled.slice(0, 2).forEach(t => {
-        draw.innerHTML += `
-            <div class="card">
-                <img src="${t.l}" loading="eager">
+    setTimeout(()=>{
+        pack.style.display="none";
+        const shuffled=[...teams].sort(()=>Math.random()-0.5);
+        shuffled.slice(0,2).forEach((t,i)=>{
+            const card=document.createElement("div");
+            card.className="card";
+            card.innerHTML=`
+                <img src="${t.l}">
                 <strong>${t.n}</strong>
-            </div>
-        `;
-    });
+            `;
+            cards.appendChild(card);
+            setTimeout(()=>card.classList.add("show"), i*700);
+        });
+    },900);
+
+    setTimeout(()=>{
+        pack.classList.remove("open");
+        pack.style.display="flex";
+    },3000);
 }
 </script>
 
