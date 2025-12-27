@@ -37,36 +37,32 @@
 <div class="player" id="p2">Gracz 2: —</div>
 
 <script>
-const druzyny = [
-    // Premier League
-    "Manchester City","Arsenal","Liverpool","Chelsea","Manchester United",
-    "Tottenham","Newcastle","Aston Villa","West Ham","Brighton",
-    "Brentford","Crystal Palace","Everton","Fulham","Nottingham Forest",
-    "Wolves","Bournemouth","Burnley","Sheffield United","Luton Town",
+const teams = [
+  { name: "Arsenal", logo: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" },
+  { name: "Aston Villa", logo: "https://upload.wikimedia.org/wikipedia/en/f/f9/Aston_Villa_FC_crest.svg" },
+  { name: "Chelsea", logo: "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" },
+  { name: "Liverpool", logo: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" },
+  { name: "Manchester City", logo: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" },
+  { name: "Manchester United", logo: "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" },
+  { name: "Tottenham Hotspur", logo: "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" },
 
-    // LaLiga
-    "Real Madryt","FC Barcelona","Atletico Madryt","Sevilla","Real Sociedad",
-    "Villarreal","Betis","Valencia","Athletic Bilbao","Girona",
-    "Getafe","Celta Vigo","Osasuna","Mallorca","Alaves",
-    "Rayo Vallecano","Granada","Las Palmas","Cadiz","Almeria",
+  { name: "Real Madrid", logo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" },
+  { name: "FC Barcelona", logo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg" },
+  { name: "Atletico Madrid", logo: "https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg" },
+  { name: "Sevilla", logo: "https://upload.wikimedia.org/wikipedia/en/9/92/Sevilla_FC_logo.svg" },
 
-    // Serie A
-    "Inter","AC Milan","Juventus","Napoli","Roma",
-    "Lazio","Atalanta","Fiorentina","Bologna","Torino",
-    "Monza","Genoa","Udinese","Lecce","Cagliari",
-    "Verona","Empoli","Frosinone","Sassuolo","Salernitana",
+  { name: "Bayern Munich", logo: "https://upload.wikimedia.org/wikipedia/commons/1/1f/FC_Bayern_München_logo_%282017%29.svg" },
+  { name: "Borussia Dortmund", logo: "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg" },
+  { name: "RB Leipzig", logo: "https://upload.wikimedia.org/wikipedia/en/0/04/RB_Leipzig.svg" },
 
-    // Bundesliga
-    "Bayern Monachium","Borussia Dortmund","RB Lipsk","Bayer Leverkusen","Eintracht Frankfurt",
-    "Union Berlin","Freiburg","Hoffenheim","Werder Brema","Wolfsburg",
-    "Mainz","Augsburg","Borussia M'gladbach","Bochum","Heidenheim",
-    "Stuttgart","Koln","Darmstadt","St. Pauli","Hamburg",
+  { name: "Juventus", logo: "https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo.svg" },
+  { name: "AC Milan", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d0/AC_Milan_Logo.svg" },
+  { name: "Inter Milan", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/Inter_Milan_logo.svg" },
+  { name: "Napoli", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2d/SSC_Napoli_logo.svg" },
 
-    // Ligue 1
-    "PSG","Marseille","Monaco","Lyon","Lille",
-    "Rennes","Nice","Lens","Reims","Strasbourg",
-    "Nantes","Montpellier","Brest","Toulouse","Lorient",
-    "Clermont","Metz","Le Havre","Angers","Auxerre"
+  { name: "Paris Saint-Germain", logo: "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" },
+  { name: "Olympique Marseille", logo: "https://upload.wikimedia.org/wikipedia/en/4/4c/Olympique_Marseille_logo.svg" },
+  { name: "AS Monaco", logo: "https://upload.wikimedia.org/wikipedia/en/c/c6/AS_Monaco_FC.svg" }
 ];
 
 function losuj() {
