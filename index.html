@@ -66,14 +66,21 @@ const teams = [
 ];
 
 function losuj() {
-    let pula = [...druzyny];
+    let pool = [...teams];
 
-    const p1 = Math.floor(Math.random() * pula.length);
-    const team1 = pula.splice(p1, 1)[0];
+    let t1 = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];
+    let t2 = pool[Math.floor(Math.random() * pool.length)];
 
-    const p2 = Math.floor(Math.random() * pula.length);
-    const team2 = pula[p2];
+    document.getElementById("p1").innerHTML =
+        "Gracz 1:<br>" +
+        "<img src='" + t1.logo + "' width='80'><br>" +
+        t1.name;
 
+    document.getElementById("p2").innerHTML =
+        "Gracz 2:<br>" +
+        "<img src='" + t2.logo + "' width='80'><br>" +
+        t2.name;
+}
     document.getElementById("p1").innerText = "Gracz 1: " + team1;
     document.getElementById("p2").innerText = "Gracz 2: " + team2;
 }
